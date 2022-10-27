@@ -1,0 +1,31 @@
+{
+  "name": "wave2go-ticket-scraper",
+  "version": "0.0.0",
+  "description": "Scrapes WSDOT's Wave2Go ticketing website for ticket info.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "tsconfigRootDir": "packages/wave2go-ticket-scraper"
+    },
+    "extends": [
+      "@sargunv/eslint-config/mixins/ts-strict"
+    ]
+  },
+  "dependencies": {
+    "date-fns": "^2.29.3",
+    "jsdom": "^20.0.2",
+    "tslib": "^2.4.1",
+    "typanion": "^3.12.1"
+  },
+  "devDependencies": {
+    "@sargunv/typescript-config": "workspace:^",
+    "typescript": "^4.8.4"
+  }
+}

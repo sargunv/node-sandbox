@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "pretty": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "incremental": true
+  }
+}

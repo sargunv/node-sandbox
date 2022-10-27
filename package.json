@@ -1,0 +1,32 @@
+{
+  "name": "sandbox-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "configure": "yarn constraints --fix && ignore-sync .",
+    "g:lint": "eslint \"$INIT_CWD\" --cache --ext js,ts,jsx,tsx",
+    "lint": "yarn constraints && run g:lint"
+  },
+  "prettier": "@sargunv/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@sargunv/eslint-config"
+    ],
+    "root": true
+  },
+  "devDependencies": {
+    "@sargunv/eslint-config": "workspace:^",
+    "@sargunv/prettier-config": "workspace:^",
+    "@types/eslint": "^8.4.10",
+    "@types/prettier": "^2.7.1",
+    "eslint": "^8.27.0",
+    "ignore-sync": "^6.0.2",
+    "prettier": "^2.7.1",
+    "prettier-plugin-packagejson": "^2.3.0",
+    "typescript": "^4.8.4"
+  },
+  "packageManager": "yarn@4.0.0-rc.22"
+}
