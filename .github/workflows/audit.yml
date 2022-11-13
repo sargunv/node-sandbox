@@ -1,0 +1,16 @@
+on:
+  schedule:
+    - cron: "0 0 * * 6" # every Saturday at midnight UTC
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .tool-versions
+          cache: yarn
+      - run: yarn npm audit --all --recursive --environment production
