@@ -1,7 +1,0 @@
-releases:
-  "@sargunv/eslint-config": minor
-  "@sargunv/prettier-config": minor
-  "@sargunv/typescript-config": minor
-
-declined:
-  - wave2go-ticket-scraper
