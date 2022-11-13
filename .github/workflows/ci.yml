@@ -17,7 +17,7 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: "yarn"
-      - uses: numtide/clean-git-action@v1
+      - uses: numtide/clean-git-action@main
       - run: yarn version check
         if: github.event_name == 'pull_request'
       - run: yarn install --immutable
