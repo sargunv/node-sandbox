@@ -1,6 +1,6 @@
 {
   "name": "@sargunv/eslint-config",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
     "@next/eslint-plugin-next": "^13.0.3",

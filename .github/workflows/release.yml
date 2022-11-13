@@ -11,6 +11,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     outputs:
       matrix: ${{ steps.target-determinator.outputs.matrix }}
+      ref: ${{ steps.auto-commit.outputs.commit_hash }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -29,6 +30,7 @@ jobs:
         with:
           commit_message: "chore: yarn version apply"
         if: steps.target-determinator.outputs.matrix != '[]'
+        id: auto-commit
 
   release:
     needs: [target-determinator]
@@ -41,6 +43,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: ${{ needs.target-determinator.outputs.ref }}
       - uses: actions/setup-node@v3
         with:
           node-version-file: .tool-versions
