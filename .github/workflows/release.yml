@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  # schedule:
+  #   - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  target-determinator:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    outputs:
+      matrix: ${{ steps.target-determinator.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: marocchino/tool-versions-action@v1
+        id: versions
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodejs }}
+          cache: "yarn"
+      - name: Get target matrix
+        run: |
+          json="$(yarn version apply --all --json | jq -cs '{ include: . }')"
+          echo "matrix=$json" >> $GITHUB_OUTPUT
+          echo "$json" | jq .
+        id: target-determinator
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: yarn version apply"
+        if: steps.target-determinator.outputs.matrix != '[]'
+
+  release:
+    needs: [target-determinator]
+    if: needs.target-determinator.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.target-determinator.outputs.matrix) }}
+    name: release ${{ matrix.ident }}@${{ matrix.newVersion }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: marocchino/tool-versions-action@v1
+        id: versions
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodejs }}
+          cache: "yarn"
+      - run: yarn workspaces focus ${{ matrix.ident }}
+      - run: yarn workspace ${{ matrix.ident }} build
+      - run: yarn workspace ${{ matrix.ident }} npm publish --access public
+        env:
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: git tag '${{ matrix.ident }}@${{ matrix.newVersion }}'
+      - run: git push origin '${{ matrix.ident }}@${{ matrix.newVersion }}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
