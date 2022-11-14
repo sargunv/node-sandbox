@@ -6024,6 +6024,7 @@ __metadata:
     prettier-plugin-packagejson: "npm:^2.3.0"
     typescript: "npm:^4.8.4"
     vercel: "npm:^28.4.17"
+    vercel-helper: "workspace:^"
   languageName: unknown
   linkType: soft
 
@@ -6711,6 +6712,16 @@ __metadata:
   checksum: 6a88ed8344d07f2324b304ee36def365d967953b5a9c15baa3213eb3909e86a7da1ee70a4c2133e80c23d6c1987590e9c3c57d874e20a124f9e41620b462fa57
   languageName: node
   linkType: hard
+
+"vercel-helper@workspace:^, vercel-helper@workspace:packages/vercel-helper":
+  version: 0.0.0-use.local
+  resolution: "vercel-helper@workspace:packages/vercel-helper"
+  peerDependencies:
+    vercel: "*"
+  bin:
+    vercel-helper: index.js
+  languageName: unknown
+  linkType: soft
 
 "vercel@npm:^28.4.17":
   version: 28.4.17

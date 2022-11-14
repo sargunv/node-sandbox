@@ -1,0 +1,9 @@
+{
+  "name": "vercel-helper",
+  "private": true,
+  "type": "module",
+  "bin": "index.js",
+  "peerDependencies": {
+    "vercel": "*"
+  }
+}

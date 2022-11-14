@@ -1,0 +1,26 @@
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        required: true
+        type: choice
+        options:
+          - wsf-wallet.www
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.target-determinator.outputs.ref }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .tool-versions
+          cache: "yarn"
+      - run: |
+          yarn workspaces focus ${{ github.event.inputs.package }} sandbox-monorepo
+      - run: |
+          cd $(yarn workspaces list --json | jq -r 'select(.name=="${{ github.event.inputs.package }}").location')
+          yarn workspace ${{ github.event.inputs.package }} g:vercel-deploy --force --prod --token='${{ secrets.VERCEL_TOKEN }}'

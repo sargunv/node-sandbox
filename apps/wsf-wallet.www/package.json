@@ -42,5 +42,10 @@
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "typescript": "^4.8.4"
+  },
+  "vercel": {
+    "orgId": "pwLprYynnnWYWVxUZLPbExsh",
+    "projectId": "prj_mmCcfKL7Z8IRKry0EnpxFxAEeitG",
+    "localConfig": "vercel.json"
   }
 }

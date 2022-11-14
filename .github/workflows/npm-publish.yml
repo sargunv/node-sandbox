@@ -28,13 +28,13 @@ jobs:
         if: steps.target-determinator.outputs.matrix != '[]'
         id: auto-commit
 
-  release:
+  publish:
     needs: [target-determinator]
     if: needs.target-determinator.outputs.matrix != '[]'
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.target-determinator.outputs.matrix) }}
-    name: release ${{ matrix.ident }}@${{ matrix.newVersion }}
+    name: publish ${{ matrix.ident }}@${{ matrix.newVersion }}
     steps:
       - uses: actions/checkout@v3
         with:
