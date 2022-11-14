@@ -1,3 +1,5 @@
+name: NPM Audit
+
 on:
   schedule:
     - cron: "0 0 * * 6" # every Saturday at midnight UTC

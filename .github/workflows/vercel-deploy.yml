@@ -1,3 +1,5 @@
+name: Vercel Deploy
+
 on:
   workflow_dispatch:
     inputs:

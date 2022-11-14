@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-import { spawn, spawnSync } from "child_process"
+import { spawnSync } from "child_process"
 import { readFileSync } from "fs"
 import { join, resolve } from "path"
-import { promisify } from "util"
 
 const projectJson = JSON.parse(
   readFileSync(join(process.env.INIT_CWD, "package.json"), "utf8"),
